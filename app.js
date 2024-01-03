@@ -32,3 +32,15 @@ if (totalAmount >= housePrice) {
   console.log(`Возможности купить дом нет :( 
     Не хватает: ${-(totalAmount - housePrice)}$`);
 }
+
+// Задача №3, Урок 25
+let answer = prompt('Сколько будет 7 + или - 15?');
+let message;
+
+if (Number(answer) === -8 || Number(answer) === 22 || answer === 'Я не робот') {
+  message = 'Успех';
+} else {
+  message = 'Вы робот!';
+}
+
+alert(message);
