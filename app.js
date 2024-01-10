@@ -1,61 +1,47 @@
-// Задача №1, Урок 16
-// const priceInHourUSD = 80;
-// const taskTimeHour = 40;
-// const myTimeHour = (11 - 2) * 5;
+// Tasks 5-6, Functions
+const toPower = (num, power) => num ** power;
 
-// let answerFirst = taskTimeHour < myTimeHour;
-// if (answerFirst == true) {
-//   answerFirst = 'Я успею выполнить заказ!';
-// } else {
-//   answerFirst = 'Я неуспею :С';
-// }
-// let answerSecond = 'Прайс: ' + priceInHourUSD * taskTimeHour + '$';
+const credit = (age, hasJob = false) => {
+  switch (true) {
+    case age >= 24 && hasJob:
+      return 500;
+    case age >= 24:
+      return 100;
+    default:
+      return 0;
+  }
+};
 
-// console.log(answerFirst, answerSecond);
+const canBuy = (age, hasJob = false, money, price) => {
+  const creditSum = money < price ? credit(age, hasJob) : 0;
+  money = money < price ? creditSum + money : money;
 
-// Задача №2, Урок 21
-// const deposit = 12000;
-// const housePrice = 13500;
-// const percent = 0.07;
-// const depositLenghtMonth = 24;
+  if (money >= price) {
+    return `Вы можете купить MacBook за ${price}$. У вас останется ${
+      price - money
+    }$, Кредит ${creditSum}$`;
+  } else {
+    return `Вы не сможете купить MacBook. Не хватает ${price - money}$`;
+  }
+};
 
-// const totalAmount = Math.round(
-//   (percent / 12 + 1) ** depositLenghtMonth * deposit
-// );
+// Tasks 7-8, Arrays
+const tasks = ['Task 1', 'Task 2'];
 
-// if (totalAmount >= housePrice) {
-//   console.log(
-//     `Возможность купить дом есть!
-//     Остаток средтв после покупки составит: ${totalAmount - housePrice}$`
-//   );
-// } else {
-//   console.log(`Возможности купить дом нет :(
-//     Не хватает: ${-(totalAmount - housePrice)}$`);
-// }
+const addTask = (task) => {
+  tasks.push(task);
+};
 
-// Задача №3, Урок 25
-// let answer = prompt('Сколько будет 7 + или - 15?');
-// let message;
+const deleteTask = (task) => {
+  const index = tasks.indexOf(task);
+  if (index < 0) {
+    return;
+  }
+  return tasks.splice(index, 1);
+};
 
-// if (Number(answer) === -8 || Number(answer) === 22 || answer === 'Я не робот') {
-//   message = 'Успех';
-// } else {
-//   message = 'Вы робот!';
-// }
-
-// alert(message);
-
-// Задача №4, Урок 30
-const balance = 900;
-const bonusBalance = 120;
-const isBanned = false;
-const isSelling = true;
-const isExist = false;
-
-const canIBuy =
-  (balance >= 1000 || bonusBalance >= 100) &&
-  !isBanned &&
-  isSelling &&
-  !isExist;
-
-console.log(`Я могу купить игру? ${canIBuy ? 'Да' : 'Нет'}`);
+const prioritizeTask = (task) => {
+  const arrayItem = deleteTask(task);
+  if (!arrayItem) return;
+  tasks.unshift(arrayItem[0]);
+};
