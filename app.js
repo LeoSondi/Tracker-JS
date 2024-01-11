@@ -45,3 +45,70 @@ const prioritizeTask = (task) => {
   if (!arrayItem) return;
   tasks.unshift(arrayItem[0]);
 };
+
+const myUrl = 'https://developers.sber.ru/portal/products/gigachat';
+
+const getUrlPaths = (string) => {
+  let [protocol, _, host, ...slug] = string.split('/');
+
+  console.log(
+    `Protocol: ${protocol.split(':')[0]}\nHost: ${host}\nSlug: /${slug.join(
+      '/'
+    )}`
+  );
+};
+
+// getUrlPaths(myUrl);
+
+// Tasks 9-10, Cycles
+const array = ['!', 'JS', 'love', 'I'];
+const newArray = [];
+
+for (let i = array.length - 1; i >= 0; i--) {
+  newArray.push(array[i]);
+}
+
+// console.log(newArray.join(' '))
+
+const userOperations = [1000, -700, 300, -500, 10000];
+let userMoney = 100;
+
+const getBalance = (operations, money) => {
+  for (const element of operations) {
+    money += element;
+  }
+  return money;
+};
+
+const checkNegativeBalance = (operations, money) => {
+  for (const element of operations) {
+    money += element;
+    if (money < 0) {
+      return false;
+    }
+  }
+  return true;
+};
+
+const getAverage = (operations) => {
+  let avgIncome = 0;
+  let avgExpenses = 0;
+  let countIncome = 0;
+  let countExpenses = 0;
+  for (const element of operations) {
+    if (element > 0) {
+      avgIncome += element;
+      countIncome++;
+    } else {
+      avgExpenses += element;
+      countExpenses++;
+    }
+  }
+  return `Средний доход: ${avgIncome / countIncome}$.\nCредние расходы: ${
+    -avgExpenses / countExpenses
+  }$`;
+};
+
+// console.log(getBalance(userOperations, userMoney));
+// console.log(checkNegativeBalance(userOperations, userMoney));
+// console.log(getAverage(userOperations));
