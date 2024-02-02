@@ -1,4 +1,4 @@
-// Tasks 5-6, Functions
+//------------------- Tasks 5-6, Functions -----------------*/
 const toPower = (num, power) => num ** power;
 
 const credit = (age, hasJob = false) => {
@@ -25,7 +25,7 @@ const canBuy = (age, hasJob = false, money, price) => {
   }
 };
 
-// Tasks 7-8, Arrays
+/*-------------------- Tasks 7-8, Arrays -----------------*/
 const tasks = ['Task 1', 'Task 2'];
 
 const addTask = (task) => {
@@ -60,7 +60,7 @@ const getUrlPaths = (string) => {
 
 // getUrlPaths(myUrl);
 
-// Tasks 9-10, Cycles
+/*------------------- Tasks 9-10, Cycles -----------------*/
 const array = ['!', 'JS', 'love', 'I'];
 const newArray = [];
 
@@ -112,3 +112,49 @@ const getAverage = (operations) => {
 // console.log(getBalance(userOperations, userMoney));
 // console.log(checkNegativeBalance(userOperations, userMoney));
 // console.log(getAverage(userOperations));
+
+/*------------------- Tasks 11, () => {} -----------------*/
+const f = (pow) => (num) => num ** pow;
+// console.log(f(10)(2));
+
+/*--------------- Tasks 12, Array methods ---------------*/
+const prices = [
+  [100, 200],
+  [120, 100],
+  [200, 350],
+  [300, 280],
+  [230, 250],
+];
+
+const increasedPrices = prices
+  .map((product) => product[1] - product[0])
+  .filter((delta) => delta > 0);
+
+// console.log(increasedPrices); // лучше сначала map, потом filter, чтобы не брать элементы по индексу дважды + забыл сократить запись
+
+/*--------------- Tasks 13, Reduce ---------------*/
+
+const pricesOfMacUSD = [172, 205, 384, 105];
+
+const avgPriceOfMacUSD = pricesOfMacUSD.reduce((acc, price, i) => {
+  if (i != pricesOfMacUSD.length - 1) {
+    return acc + price;
+  } else {
+    return (acc + price) / pricesOfMacUSD.length;
+  }
+}, 0);
+
+// console.log(avgPriceOfMacUSD);
+// 216.5
+
+/*--------------- Tasks 14, Some ---------------*/
+const arrayForSome = [2, 3, [5, 6], [6, 8], 7, 12, 35];
+
+const someFunction = (el, arr) => {
+  let result = arr.find((e) => el === e);
+  return result != undefined ? true : false;
+};
+
+// console.log(someFunction(6, arrayForSome))
+
+/*--------------- Tasks 15,  ---------------*/
