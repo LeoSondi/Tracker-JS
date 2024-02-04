@@ -123,14 +123,14 @@ const prices = [
   [120, 100],
   [200, 350],
   [300, 280],
-  [230, 250],
+  [230, 270],
 ];
 
 const increasedPrices = prices
   .map((product) => product[1] - product[0])
   .filter((delta) => delta > 0);
 
-// console.log(increasedPrices); // лучше сначала map, потом filter, чтобы не брать элементы по индексу дважды + забыл сократить запись
+// console.log(increasedPrices); // лучше сначала map, потом filter, чтобы не брать элементы по индексу дважды
 
 /*--------------- Tasks 13, Reduce ---------------*/
 
@@ -157,4 +157,145 @@ const someFunction = (el, arr) => {
 
 // console.log(someFunction(6, arrayForSome))
 
-/*--------------- Tasks 15,  ---------------*/
+/*--------------- Tasks 15, strings ---------------*/
+const userData = 'Вася Терминатор Пердинатор Пупкин';
+
+const getFullName = (data) => {
+  const name = `${data.slice(0, data.indexOf(' '))}${data.slice(
+    data.lastIndexOf(' '),
+    data.length
+  )}`;
+
+  return name;
+};
+
+// console.log(getFullName(userData));
+
+/*--------------- Tasks 16, Num check ---------------*/
+
+const num1 = '85845454455';
+const num2 = '+75845454455';
+const num3 = '+7(584)5454455';
+const num4 = '+7(584) 451-44-55';
+const num5 = '  +7(584) 451-44-55    ';
+
+const erNum1 = '85844455';
+const erNum2 = '+7(ds584)5454455';
+const erNum3 = '9+7585454455';
+const erNum4 = '85845h54455';
+
+const isNum = (num) => {
+  let res = num.trim();
+  res = res.replaceAll('-', '');
+  res = res.replaceAll('(', '');
+  res = res.replaceAll(')', '');
+  res = res.replaceAll(' ', '');
+  res = res.replaceAll('+7', '8');
+
+  if (res.length === 11 && !isNaN(Number(res)) && res.startsWith('8')) {
+    return res;
+  }
+
+  return 'Номер не валидный';
+};
+
+// console.log(isNum(num1));
+// console.log(isNum(num2));
+// console.log(isNum(num3));
+// console.log(isNum(num4));
+// console.log(isNum(num5));
+// console.log(isNum(erNum1));
+// console.log(isNum(erNum2));
+// console.log(isNum(erNum3));
+// console.log(isNum(erNum4));
+
+/*--------------- Tasks 17, Card save ---------------*/
+const cardNum = '2343554411995659';
+
+const saveCard = (card) => {
+  return card.substr(-4).padStart(8, '*');
+};
+
+// console.log(saveCard(cardNum));
+
+/*--------------- Tasks 18, Users sort ---------------*/
+const users = [
+  {
+    name: 'Аня',
+    surname: 'Озерская',
+    age: 36,
+    skills: ['Готовка', 'Обучение нейросетей', 'Милота'],
+  },
+  {
+    name: 'Даниил',
+    surname: 'Варнавский',
+    age: 25,
+    skills: ['Программирование', 'Футбол', 'Анлгийский'],
+  },
+  {
+    name: 'Женя',
+    surname: 'Фалалеев',
+    age: 13,
+    skills: ['ПДД', 'Хоккей'],
+  },
+  {
+    name: 'Алиса',
+    surname: 'Вольхина',
+    age: 23,
+    skills: ['Логистика', 'Психология'],
+  },
+];
+
+// Сортировака по возрастанию возраста
+users.sort((a, b) => a.age - b.age);
+
+// console.log(users);
+
+/*--------------- Tasks 19, Object converting ---------------*/
+const newUsers = users.map((user) => {
+  const fullName = user.name + ' ' + user.surname;
+  const skillsCount = user.skills.length;
+  return { fullName, skillsCount };
+});
+
+// console.log(newUsers);
+
+/*--------------- Tasks 20, Object methods ---------------*/
+
+const wallet = {
+  balance: 0,
+  operations: [],
+  increase: function (sum, reason) {
+    this.balance = this.balance + sum;
+    this.operations.push({
+      reason,
+      sum: `+${sum}$`,
+    });
+    return true;
+  },
+  decrease: function (sum, reason) {
+    if (this.balance < sum) {
+      this.operations.push({
+        reason: `Операция отклонена! ${reason}`,
+        sum: `-${sum}$`,
+      });
+      return false;
+    }
+    this.balance = this.balance - sum;
+    this.operations.push({
+      reason,
+      sum: `-${sum}$`,
+    });
+    return true;
+  },
+  operationsCount: function () {
+    return this.operations.length;
+  },
+};
+
+wallet.increase(3243, 'Зарплата');
+wallet.decrease(956, 'Покупка Wildberries');
+wallet.decrease(2355, 'Покупка Apple, MacBook Pro');
+
+// console.log(wallet.operations);
+// console.log(wallet.balance);
