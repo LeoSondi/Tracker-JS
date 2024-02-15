@@ -1,61 +1,37 @@
-// Задание про склад товаров
+'use strict';
 
-const phone = {
-  id: 1,
-  name: 'phone',
-  weight: {
-    kg: 0.25,
+const company = {
+  name: 'ООО Арго',
+  employees: [
+    {
+      name: 'Mark',
+    },
+    {
+      name: 'Den',
+    },
+    {
+      name: 'Anna',
+    },
+  ],
+  getEmployeeName: function () {
+    const allEmployees = [];
+    this.employees.map((el) => {
+      allEmployees.push(el.name);
+    });
+    console.log(allEmployees.join(', '));
   },
-  brand: 'Apple',
-};
 
-const laptop = {
-  id: 2,
-  name: 'laptop',
-  weight: {
-    kg: 1.6,
+  ceo: {
+    name: 'Frank',
+    getCeoName: function () {
+      console.log(this.name);
+    },
   },
-  brand: 'Apple',
-};
-
-const chair = {
-  id: 3,
-  name: 'chair',
-  weight: {
-    kg: 2,
-  },
-};
-
-const paper = {
-  id: 4,
-  name: 'paper',
-  color: 'white',
-};
-
-const warehouse = {
-  goods: [],
-  findGoodById: function (id) {
-    return this.goods.find((g) => g.id === id);
-  },
-  addGood: function (good) {
-    if (this.findGoodById(good.id)) {
-      return 'Товар уже на складе';
-    }
-    this.goods.push({ ...good });
-  },
-  getAllWeightKg: function () {
-    return this.goods.reduce(
-      (acc, el) => (acc += el.weight?.kg ? el.weight.kg : 0),
-      0
-    );
+  getCompanyName: function () {
+    console.log(this.name);
   },
 };
 
-warehouse.addGood(chair);
-warehouse.addGood(paper);
-warehouse.addGood(phone);
-warehouse.addGood(laptop);
-
-console.log(warehouse.goods);
-console.log(warehouse.findGoodById(1));
-console.log(warehouse.getAllWeightKg());
+company.getCompanyName();
+company.ceo.getCeoName();
+company.getEmployeeName();
