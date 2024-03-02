@@ -26,7 +26,7 @@ const canBuy = (age, hasJob = false, money, price) => {
 };
 
 /*-------------------- Tasks 7-8, Arrays -----------------*/
-const tasks = ['Task 1', 'Task 2'];
+const tasks = ["Task 1", "Task 2"];
 
 const addTask = (task) => {
   tasks.push(task);
@@ -46,14 +46,14 @@ const prioritizeTask = (task) => {
   tasks.unshift(arrayItem[0]);
 };
 
-const myUrl = 'https://developers.sber.ru/portal/products/gigachat';
+const myUrl = "https://developers.sber.ru/portal/products/gigachat";
 
 const getUrlPaths = (string) => {
-  let [protocol, _, host, ...slug] = string.split('/');
+  let [protocol, _, host, ...slug] = string.split("/");
 
   console.log(
-    `Protocol: ${protocol.split(':')[0]}\nHost: ${host}\nSlug: /${slug.join(
-      '/'
+    `Protocol: ${protocol.split(":")[0]}\nHost: ${host}\nSlug: /${slug.join(
+      "/"
     )}`
   );
 };
@@ -61,7 +61,7 @@ const getUrlPaths = (string) => {
 // getUrlPaths(myUrl);
 
 /*------------------- Tasks 9-10, Cycles -----------------*/
-const array = ['!', 'JS', 'love', 'I'];
+const array = ["!", "JS", "love", "I"];
 const newArray = [];
 
 for (let i = array.length - 1; i >= 0; i--) {
@@ -158,11 +158,11 @@ const someFunction = (el, arr) => {
 // console.log(someFunction(6, arrayForSome))
 
 /*--------------- Tasks 15, strings ---------------*/
-const userData = 'Вася Терминатор Пердинатор Пупкин';
+const userData = "Вася Терминатор Пердинатор Пупкин";
 
 const getFullName = (data) => {
-  const name = `${data.slice(0, data.indexOf(' '))}${data.slice(
-    data.lastIndexOf(' '),
+  const name = `${data.slice(0, data.indexOf(" "))}${data.slice(
+    data.lastIndexOf(" "),
     data.length
   )}`;
 
@@ -173,30 +173,30 @@ const getFullName = (data) => {
 
 /*--------------- Tasks 16, Num check ---------------*/
 
-const num1 = '85845454455';
-const num2 = '+75845454455';
-const num3 = '+7(584)5454455';
-const num4 = '+7(584) 451-44-55';
-const num5 = '  +7(584) 451-44-55    ';
+const num1 = "85845454455";
+const num2 = "+75845454455";
+const num3 = "+7(584)5454455";
+const num4 = "+7(584) 451-44-55";
+const num5 = "  +7(584) 451-44-55    ";
 
-const erNum1 = '85844455';
-const erNum2 = '+7(ds584)5454455';
-const erNum3 = '9+7585454455';
-const erNum4 = '85845h54455';
+const erNum1 = "85844455";
+const erNum2 = "+7(ds584)5454455";
+const erNum3 = "9+7585454455";
+const erNum4 = "85845h54455";
 
 const isNum = (num) => {
   let res = num.trim();
-  res = res.replaceAll('-', '');
-  res = res.replaceAll('(', '');
-  res = res.replaceAll(')', '');
-  res = res.replaceAll(' ', '');
-  res = res.replaceAll('+7', '8');
+  res = res.replaceAll("-", "");
+  res = res.replaceAll("(", "");
+  res = res.replaceAll(")", "");
+  res = res.replaceAll(" ", "");
+  res = res.replaceAll("+7", "8");
 
-  if (res.length === 11 && !isNaN(Number(res)) && res.startsWith('8')) {
+  if (res.length === 11 && !isNaN(Number(res)) && res.startsWith("8")) {
     return res;
   }
 
-  return 'Номер не валидный';
+  return "Номер не валидный";
 };
 
 // console.log(isNum(num1));
@@ -210,10 +210,10 @@ const isNum = (num) => {
 // console.log(isNum(erNum4));
 
 /*--------------- Tasks 17, Card save ---------------*/
-const cardNum = '2343554411995659';
+const cardNum = "2343554411995659";
 
 const saveCard = (card) => {
-  return card.substr(-4).padStart(8, '*');
+  return card.substr(-4).padStart(8, "*");
 };
 
 // console.log(saveCard(cardNum));
@@ -221,28 +221,28 @@ const saveCard = (card) => {
 /*--------------- Tasks 18, Users sort ---------------*/
 const users = [
   {
-    name: 'Аня',
-    surname: 'Озерская',
+    name: "Аня",
+    surname: "Озерская",
     age: 36,
-    skills: ['Готовка', 'Обучение нейросетей', 'Милота'],
+    skills: ["Готовка", "Обучение нейросетей", "Милота"],
   },
   {
-    name: 'Даниил',
-    surname: 'Варнавский',
+    name: "Даниил",
+    surname: "Варнавский",
     age: 25,
-    skills: ['Программирование', 'Футбол', 'Анлгийский'],
+    skills: ["Программирование", "Футбол", "Анлгийский"],
   },
   {
-    name: 'Женя',
-    surname: 'Фалалеев',
+    name: "Женя",
+    surname: "Фалалеев",
     age: 13,
-    skills: ['ПДД', 'Хоккей'],
+    skills: ["ПДД", "Хоккей"],
   },
   {
-    name: 'Алиса',
-    surname: 'Вольхина',
+    name: "Алиса",
+    surname: "Вольхина",
     age: 23,
-    skills: ['Логистика', 'Психология'],
+    skills: ["Логистика", "Психология"],
   },
 ];
 
@@ -253,7 +253,7 @@ users.sort((a, b) => a.age - b.age);
 
 /*--------------- Tasks 19, Object converting ---------------*/
 const newUsers = users.map((user) => {
-  const fullName = user.name + ' ' + user.surname;
+  const fullName = user.name + " " + user.surname;
   const skillsCount = user.skills.length;
   return { fullName, skillsCount };
 });
@@ -293,9 +293,9 @@ const wallet = {
   },
 };
 
-wallet.increase(3243, 'Зарплата');
-wallet.decrease(956, 'Покупка Wildberries');
-wallet.decrease(2355, 'Покупка Apple, MacBook Pro');
+wallet.increase(3243, "Зарплата");
+wallet.decrease(956, "Покупка Wildberries");
+wallet.decrease(2355, "Покупка Apple, MacBook Pro");
 
 // console.log(wallet.operations);
 // console.log(wallet.balance);
@@ -304,25 +304,25 @@ wallet.decrease(2355, 'Покупка Apple, MacBook Pro');
 
 const phone = {
   id: 1,
-  name: 'phone',
+  name: "phone",
   weight: {
     kg: 0.25,
   },
-  brand: 'Apple',
+  brand: "Apple",
 };
 
 const laptop = {
   id: 2,
-  name: 'laptop',
+  name: "laptop",
   weight: {
     kg: 1.6,
   },
-  brand: 'Apple',
+  brand: "Apple",
 };
 
 const chair = {
   id: 3,
-  name: 'chair',
+  name: "chair",
   weight: {
     kg: 2,
   },
@@ -330,8 +330,8 @@ const chair = {
 
 const paper = {
   id: 4,
-  name: 'paper',
-  color: 'white',
+  name: "paper",
+  color: "white",
 };
 
 const warehouse = {
@@ -341,7 +341,7 @@ const warehouse = {
   },
   addGood: function (good) {
     if (this.findGoodById(good.id)) {
-      return 'Товар уже на складе';
+      return "Товар уже на складе";
     }
     this.goods.push({ ...good });
   },
@@ -361,3 +361,55 @@ warehouse.addGood(laptop);
 console.log(warehouse.goods);
 console.log(warehouse.findGoodById(1));
 console.log(warehouse.getAllWeightKg());
+
+// Обьект в обьекте, 15 раздел
+const company = {
+  name: "ООО Арго",
+  employees: [
+    {
+      name: "Mark",
+    },
+    {
+      name: "Den",
+    },
+    {
+      name: "Anna",
+    },
+  ],
+  getEmployeeName: function () {
+    const allEmployees = [];
+    this.employees.map((el) => {
+      allEmployees.push(el.name);
+    });
+    console.log(allEmployees.join(", "));
+  },
+
+  ceo: {
+    name: "Frank",
+    getCeoName: function () {
+      console.log(this.name);
+    },
+  },
+  getCompanyName: function () {
+    console.log(this.name);
+  },
+};
+
+company.getCompanyName();
+company.ceo.getCeoName();
+company.getEmployeeName();
+
+// Таски из раздела 16
+
+function resetPassword(reset) {
+  reset ? (this.password = undefined) : (this.password = "1");
+}
+
+const user = {
+  name: "Dan",
+  password: "omg_2024",
+};
+
+const resetUserPassword = resetPassword.bind(user, true);
+resetUserPassword();
+console.log(user);
