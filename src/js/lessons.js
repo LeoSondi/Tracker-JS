@@ -361,3 +361,79 @@ warehouse.addGood(laptop);
 console.log(warehouse.goods);
 console.log(warehouse.findGoodById(1));
 console.log(warehouse.getAllWeightKg());
+
+// Задача из 15 раздела
+const company = {
+  name: 'ООО Арго',
+  employees: [
+    {
+      name: 'Mark',
+    },
+    {
+      name: 'Den',
+    },
+    {
+      name: 'Anna',
+    },
+  ],
+  getEmployeeName: function () {
+    const allEmployees = [];
+    this.employees.map((el) => {
+      allEmployees.push(el.name);
+    });
+    console.log(allEmployees.join(', '));
+  },
+
+  ceo: {
+    name: 'Frank',
+    getCeoName: function () {
+      console.log(this.name);
+    },
+  },
+  getCompanyName: function () {
+    console.log(this.name);
+  },
+};
+
+company.getCompanyName();
+company.ceo.getCeoName();
+company.getEmployeeName();
+
+// Замыкание, 16 раздел
+
+function changeBalance() {
+  let balance = 0
+  return function(sum) {
+    balance += sum;
+    console.log(`Баланс: ${balance}`);
+  }
+}
+
+const change = changeBalance()
+change(100)
+change(-50)
+change(200)
+
+const userInfo = {
+  balance: 0,
+  operations: 0,
+  increse(sum) {
+    this.balance += sum;
+    this.operations++;
+  }
+}
+
+function userCreate() {
+  let newUser = Object.assign({},userInfo)
+  return function(){
+    return newUser;
+  }
+}
+
+const user1 = userCreate();
+user1().increse(100)
+console.log(user1())
+
+const user2 = userCreate();
+user2().increse(200)
+console.log(user2())
