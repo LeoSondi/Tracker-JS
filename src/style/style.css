@@ -80,12 +80,86 @@ body {
   width: 100%;
 }
 
-/* ---------------------------------------------- */
+/* ----------------- Default classes ---------------- */
 
 .wrapper {
   padding: 0 24px;
+  position: relative;
   overflow: hidden;
+  margin: 0 auto;
+  max-width: 1440px;
 }
+
+.button {
+  border-radius: 20px;
+  padding: 16px 32px;
+  font-size: 1.5rem;
+  transition: all 0.15s;
+}
+
+.close-button {
+  border-radius: 24px;
+  background: none;
+  border: 2px solid #fff;
+  transition: all 0.15s;
+}
+
+.close-button:hover {
+  transform: scale(1.1);
+}
+
+.modal {
+  padding: 12px;
+  border-radius: 24px;
+  backdrop-filter: blur(10px);
+  background: #151515;
+  width: fit-content;
+  height: auto;
+  position: relative;
+  z-index: 10;
+}
+
+.modal-container {
+  display: none;
+  position: absolute;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background: #202020c0;
+  backdrop-filter: blur(8px);
+}
+
+.active {
+  display: flex;
+}
+
+.modal__img {
+  width: 100%;
+  height: auto;
+  max-width: 250px;
+}
+
+.notification {
+  display: none;
+  padding: 16px 32px;
+  font-size: 1.5rem;
+  background-color: #202020;
+  border: 2px solid #ffca67;
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  z-index: 10;
+  border-radius: 20px;
+  transition: all 0.15s;
+}
+
+/* --------------------------------------------------- */
 
 .first {
   padding: 32px 0;
@@ -95,7 +169,7 @@ body {
   width: 100%;
   height: auto;
   max-width: 200px;
-  margin: 0 0 -10px;
+  margin: 0 -15px -10px 0;
 }
 
 .first__panel {
@@ -110,20 +184,28 @@ body {
   font-size: 2rem;
 }
 
+.first__form {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+}
+
 .first__input {
-  border-radius: 18px;
+  width: 100%;
+  border-radius: 20px;
   padding: 16px 12px;
   font-size: 1.5rem;
   color: #fff;
   background-color: #303030;
 }
 
-.first__button {
-  border-radius: 18px;
-  padding: 16px 12px;
-  font-size: 1.5rem;
+.primary-button_msg {
+  border-radius: 20px 20px 20px 4px;
 }
-.first__button:hover {
-  background: #ffc456;
-  color: #774500;
+
+.primary-button:hover {
+  background: #ffca67;
+  color: #462900;
+  transform: scale(1.05);
 }
