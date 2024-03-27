@@ -74,8 +74,8 @@ h6 {
 }
 body {
   font-family: "Trebuchet MS", sans-serif;
-  background: #202020;
-  color: #fff;
+  background: #ececff;
+  color: #101010;
   height: 100%;
   width: 100%;
 }
@@ -103,7 +103,6 @@ body {
   border: 2px solid #fff;
   transition: all 0.15s;
 }
-
 .close-button:hover {
   transform: scale(1.1);
 }
@@ -114,14 +113,12 @@ body {
   background: #101010;
   width: fit-content;
 }
-
 .modal-items {
   display: flex;
   gap: 12px;
   align-items: flex-start;
   justify-content: center;
 }
-
 .modal-container {
   display: none;
   position: absolute;
@@ -142,73 +139,4 @@ body {
   display: flex;
 }
 
-.modal__img {
-  width: 100%;
-  height: auto;
-  max-width: 250px;
-}
-
-.notification {
-  display: none;
-  padding: 16px 32px;
-  font-size: 1.5rem;
-  background-color: #202020;
-  border: 2px solid #ffca67;
-  position: fixed;
-  top: 32px;
-  right: 32px;
-  z-index: 10;
-  border-radius: 20px;
-  transition: all 0.15s;
-}
-
 /* --------------------------------------------------- */
-
-.first {
-  padding: 32px 0;
-}
-
-.first__image {
-  width: 100%;
-  height: auto;
-  max-width: 200px;
-  margin: 0 -15px -10px 0;
-}
-
-.first__panel {
-  background-color: #303030;
-  padding: 64px;
-  border-radius: 32px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 0 24px;
-  font-size: 2rem;
-}
-
-.first__form {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 16px;
-}
-
-.first__input {
-  width: 100%;
-  border-radius: 20px;
-  padding: 16px 12px;
-  font-size: 1.5rem;
-  color: #fff;
-  background-color: #303030;
-}
-
-.primary-button_msg {
-  border-radius: 20px 20px 20px 4px;
-}
-
-.primary-button:hover {
-  background: #ffca67;
-  color: #462900;
-  transform: scale(1.05);
-}
