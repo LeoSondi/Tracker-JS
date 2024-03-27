@@ -362,7 +362,7 @@ console.log(warehouse.goods);
 console.log(warehouse.findGoodById(1));
 console.log(warehouse.getAllWeightKg());
 
-// Обьект в обьекте, 15 раздел
+// Задача из 15 раздела
 const company = {
   name: "ООО Арго",
   employees: [
@@ -399,17 +399,41 @@ company.getCompanyName();
 company.ceo.getCeoName();
 company.getEmployeeName();
 
-// Таски из раздела 16
+// Замыкание, 16 раздел
 
-function resetPassword(reset) {
-  reset ? (this.password = undefined) : (this.password = "1");
+function changeBalance() {
+  let balance = 0;
+  return function (sum) {
+    balance += sum;
+    console.log(`Баланс: ${balance}`);
+  };
 }
 
-const user = {
-  name: "Dan",
-  password: "omg_2024",
+const change = changeBalance();
+change(100);
+change(-50);
+change(200);
+
+const userInfo = {
+  balance: 0,
+  operations: 0,
+  increse(sum) {
+    this.balance += sum;
+    this.operations++;
+  },
 };
 
-const resetUserPassword = resetPassword.bind(user, true);
-resetUserPassword();
-console.log(user);
+function userCreate() {
+  let newUser = Object.assign({}, userInfo);
+  return function () {
+    return newUser;
+  };
+}
+
+const user1 = userCreate();
+user1().increse(100);
+console.log(user1());
+
+const user2 = userCreate();
+user2().increse(200);
+console.log(user2());

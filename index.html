@@ -4,8 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="src/style/style.css" />
   </head>
-  <body>
-    <script src="/src/js/app.js"></script>
+  <body onkeydown="closeKeydownModal(event)">
+    <div class="modal-container">
+      <div class="modal-items">
+        <div class="modal"></div>
+        <button class="close-button" onclick="closeModal()">
+          <img src="src/assets/close.svg" width="24px" height="24px" />
+        </button>
+      </div>
+    </div>
+    <div class="wrapper">
+      <header class="header"></header>
+      <main class="main">
+        <section></section>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+    <script src="src/js/app.js"></script>
   </body>
 </html>
