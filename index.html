@@ -6,22 +6,54 @@
     <title>Document</title>
     <link rel="stylesheet" href="src/style/style.css" />
   </head>
-  <body onkeydown="closeKeydownModal(event)">
-    <div class="modal-container">
-      <div class="modal-items">
-        <div class="modal"></div>
-        <button class="close-button" onclick="closeModal()">
-          <img src="src/assets/close.svg" width="24px" height="24px" />
+  <body>
+    <div class="panel">
+      <header class="header">
+        <p class="header__name">YeNote</p>
+        <nav class="header__navigation navigation"></nav>
+        <button class="header__add-btn button">
+          <img src="src/assets/plus.svg" alt="Add" class="btn-icon" />
         </button>
-      </div>
-    </div>
-    <div class="wrapper">
-      <header class="header"></header>
+      </header>
       <main class="main">
-        <section></section>
+        <div class="main__head">
+          <div>
+            <h1 class="main__title">Название привычки</h1>
+            <h2 class="main__subtitle">Цель: N дней</h2>
+          </div>
+          <div class="progress">
+            <div class="progress__text">
+              <div class="progress__name">Прогресс</div>
+              <div class="progress__percent">N%</div>
+            </div>
+            <div class="progress__bar">
+              <div class="progress__cover-bar"></div>
+            </div>
+          </div>
+        </div>
+        <div class="main__content">
+          <div class="habbits"></div>
+          <div class="habbit">
+            <div class="habbit__day"></div>
+            <form class="habbit__form" onsubmit="addDays(event)">
+              <input
+                name="comment"
+                class="habbit__comment"
+                type="text"
+                placeholder="Комментарий"
+              />
+              <button type="submit" class="habbit__add">Готово</button>
+            </form>
+          </div>
+        </div>
       </main>
-      <footer class="footer"></footer>
+      <footer class="footer">
+        <p class="footer__text">
+          <a href="https://github.com/LeoSondi" target="_blank">GitHub</a>
+        </p>
+        <p class="footer__text">YeNote, 2024</p>
+      </footer>
     </div>
-    <script src="src/js/app.js"></script>
+    <script src="src/scripts/app.js"></script>
   </body>
 </html>
