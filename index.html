@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>YeNote</title>
     <link rel="stylesheet" href="src/style/style.css" />
   </head>
   <body>
@@ -11,20 +11,23 @@
       <header class="header">
         <p class="header__name">YeNote</p>
         <nav class="header__navigation navigation"></nav>
-        <button class="header__add-btn button">
-          <img src="src/assets/plus.svg" alt="Add" class="btn-icon" />
+        <button class="header__add-btn button" onclick="openPopup()">
+          <img src="src/assets/img/plus.svg" alt="Add" class="btn-icon" />
         </button>
       </header>
       <main class="main">
         <div class="main__head">
           <div>
-            <h1 class="main__title">Название привычки</h1>
-            <h2 class="main__subtitle">Цель: N дней</h2>
+            <h1 class="main__title">Add your habbits</h1>
+            <h2 class="main__subtitle">Set goals and track your progress</h2>
+            <button class="main__habbit-delete-btn" onclick="deleteHabbit()">
+              Close this goal
+            </button>
           </div>
           <div class="progress">
             <div class="progress__text">
-              <div class="progress__name">Прогресс</div>
-              <div class="progress__percent">N%</div>
+              <div class="progress__name">Progress</div>
+              <div class="progress__percent">0%</div>
             </div>
             <div class="progress__bar">
               <div class="progress__cover-bar"></div>
@@ -33,16 +36,19 @@
         </div>
         <div class="main__content">
           <div class="habbits"></div>
-          <div class="habbit">
-            <div class="habbit__day"></div>
-            <form class="habbit__form" onsubmit="addDays(event)">
+          <div class="habbit habbit-add-adaptive">
+            <div class="habbit__day">Day 1</div>
+            <form
+              class="habbit__form habbit__form_adaptive"
+              onsubmit="addDay(event)"
+            >
               <input
                 name="comment"
-                class="habbit__comment"
+                class="input"
                 type="text"
                 placeholder="Комментарий"
               />
-              <button type="submit" class="habbit__add">Готово</button>
+              <button type="submit" class="habbit__add">Let`s go</button>
             </form>
           </div>
         </div>
@@ -50,9 +56,77 @@
       <footer class="footer">
         <p class="footer__text">
           <a href="https://github.com/LeoSondi" target="_blank">GitHub</a>
+          |
+          <a href="https://t.me/leosondi" target="_blank">
+            <img src="src/assets/img/telegram.svg" alt="Telegram" />
+          </a>
         </p>
         <p class="footer__text">YeNote, 2024</p>
       </footer>
+    </div>
+    <div class="cover cover_hidden">
+      <div class="popup">
+        <button class="popup__close-btn" onclick="closePopup()">
+          <img src="src/assets/img/cross.svg" alt="Close Icon" />
+        </button>
+        <h2>New target</h2>
+        <div class="popup__icon-label">Choose icon 👇</div>
+        <div class="popup__icon-select">
+          <button
+            class="popup__icon-btn popup__icon-btn_active button"
+            onclick="setIcon(this, 'graduation-cap')"
+          >
+            <img
+              src="/src/assets/img/graduation-cap.svg"
+              alt="Graduation Icon"
+            />
+          </button>
+          <button class="popup__icon-btn button" onclick="setIcon(this, 'gym')">
+            <img src="/src/assets/img/gym.svg" alt="Gym Icon" />
+          </button>
+          <button class="popup__icon-btn button" onclick="setIcon(this, 'key')">
+            <img src="/src/assets/img/key.svg" alt="Key Icon" />
+          </button>
+          <button
+            class="popup__icon-btn button"
+            onclick="setIcon(this, 'salad')"
+          >
+            <img src="/src/assets/img/salad.svg" alt="Food Icon" />
+          </button>
+          <button
+            class="popup__icon-btn button"
+            onclick="setIcon(this, 'world')"
+          >
+            <img src="/src/assets/img/world.svg" alt="World Icon" />
+          </button>
+        </div>
+        <form class="popup__form" onsubmit="addHabbit(event)">
+          <input
+            type="text"
+            name="name"
+            placeholder="Target name"
+            class="input"
+          />
+          <input
+            type="text"
+            name="icon"
+            placeholder="Icon"
+            class="input"
+            hidden="true"
+            value="graduation-cap"
+          />
+          <input
+            type="number"
+            name="target"
+            placeholder="How many days?"
+            class="input"
+            min="1"
+          />
+          <button type="submit" class="popup__button button">
+            Go, stay goal!
+          </button>
+        </form>
+      </div>
     </div>
     <script src="src/scripts/app.js"></script>
   </body>

@@ -18,6 +18,10 @@ const page = {
     days: document.querySelector(".habbits"),
     nextDay: document.querySelector(".habbit__day"),
   },
+  popup: {
+    index: document.querySelector(".cover"),
+    iconInput: document.querySelector(".popup__form input[name='icon']"),
+  },
 };
 
 /* utils */
@@ -25,6 +29,7 @@ const page = {
 const loadData = () => {
   const habbitsString = localStorage.getItem(HABBIT_KEY);
   const habbitArray = JSON.parse(habbitsString);
+
   if (Array.isArray(habbitArray)) {
     habbits = habbitArray;
   }
@@ -34,25 +39,52 @@ const saveData = () => {
   localStorage.setItem(HABBIT_KEY, JSON.stringify(habbits));
 };
 
+const validateForm = (form, fields) => {
+  const formData = new FormData(form);
+  const res = {};
+
+  for (const field of fields) {
+    const fieldValue = formData.get(field);
+    form[field].classList.remove("error");
+    if (!fieldValue) {
+      form[field].classList.add("error");
+    }
+    res[field] = fieldValue;
+  }
+
+  let isValid = true;
+
+  for (const field of fields) {
+    if (!res[field]) {
+      isValid = false;
+    }
+  }
+  if (!isValid) {
+    return;
+  }
+  return res;
+};
+
 /* render */
 
 const rerenderMenu = (activeHabbit) => {
   for (const habbit of habbits) {
     const existed = document.querySelector(`[menu-habbit-id="${habbit.id}"]`);
+
     if (!existed) {
-      // Создаю новую привычку, если такой ещё нет
       const element = document.createElement("button");
       element.setAttribute("menu-habbit-id", habbit.id);
       element.classList.add("navigation__link");
       element.addEventListener("click", () => rerender(habbit.id));
-      element.innerHTML = `<img src="/src/assets/${habbit.icon}.svg" alt="${habbit.name}" class="btn-icon"/>`;
-      // Сразу делаю активной
+      element.innerHTML = `<img src="/src/assets/img/${habbit.icon}.svg" alt="${habbit.name}" class="btn-icon"/>`;
+
       if (activeHabbit.id === habbit.id) {
         element.classList.add("navigation__link_active");
       }
       page.menu.appendChild(element);
       continue;
     }
+
     if (activeHabbit.id === habbit.id) {
       existed.classList.add("navigation__link_active");
     } else {
@@ -63,7 +95,7 @@ const rerenderMenu = (activeHabbit) => {
 
 const rerenderHead = (activeHabbit) => {
   page.header.h1.innerText = activeHabbit.name;
-  page.header.h2.innerHTML = `<img src="src/assets/bullseye-arrow.svg" alt="Goal Icon" /> Цель — ${activeHabbit.target} дней`;
+  page.header.h2.innerHTML = `<img src="src/assets/img/bullseye-arrow.svg" alt="Goal Icon" /> Target — ${activeHabbit.target} days`;
   let progress =
     activeHabbit.days.length / activeHabbit.target > 1
       ? 100
@@ -78,14 +110,24 @@ const rerenderContent = (activeHabbit) => {
     const element = document.createElement("div");
     element.classList.add("habbit");
     element.innerHTML = `
-      <div class="habbit__day">День ${index * 1 + 1}</div>
-      <div class="habbit__comment">${activeHabbit.days[index].comment}</div>
-      <button class="habbit__delete">
-        <img src="src/assets/trash.svg" alt="Delete Icon" />
+      <div class="habbit__day">Day ${
+        index * 1 + 1
+      }<button class="habbit__delete habbit__delete-mobile" onclick="deleteDay(${index}, ${
+      activeHabbit.id
+    })">
+          <img src="src/assets/img/trash.svg" alt="Delete Icon" />
+        </button></div>
+      <div class="habbit__comment input">${
+        activeHabbit.days[index].comment
+      }</div>
+      <button class="habbit__delete habbit__delete-desktop" onclick="deleteDay(${index}, ${
+      activeHabbit.id
+    })">
+        <img src="src/assets/img/trash.svg" alt="Delete Icon" />
       </button>`;
     page.content.days.appendChild(element);
   }
-  page.content.nextDay.innerHTML = `День ${activeHabbit.days.length + 1}`;
+  page.content.nextDay.innerHTML = `Day ${activeHabbit.days.length + 1}`;
 };
 
 const rerender = (activeHabbitId) => {
@@ -94,39 +136,108 @@ const rerender = (activeHabbitId) => {
   if (!activeHabbit) {
     return;
   }
+  // сохранение хеша таба, чтобы при обновлении продолжить работу с приложением на том же табе
+  document.location.replace(document.location.pathname + "#" + activeHabbitId);
   rerenderMenu(activeHabbit);
   rerenderHead(activeHabbit);
   rerenderContent(activeHabbit);
 };
 
-/* add days function */
+/* days function */
 
-const addDays = (event) => {
-  const form = event.target;
+const addDay = (event) => {
   event.preventDefault();
-  const data = new FormData(form);
-  const comment = data.get("comment");
+  const data = validateForm(event.target, ["comment"]);
 
-  if (!comment) {
-    form["comment"].classList.add("error");
-  } else {
-    form["comment"].classList.remove("error");
-  }
+  if (!data) return;
+
   habbits = habbits.map((habbit) => {
     if (habbit.id === ACTIVE_HABBIT_ID) {
       return {
         ...habbit,
-        days: habbit.days.concat([{ comment }]),
+        days: habbit.days.concat([{ comment: data.comment }]),
       };
     }
     return habbit;
   });
-  form["comment"].value = "";
+  event.target.reset();
   rerender(ACTIVE_HABBIT_ID);
+  saveData();
+};
+
+const deleteDay = (currentDayId) => {
+  habbits = habbits.map((habbit) => {
+    if (habbit.id === ACTIVE_HABBIT_ID) {
+      habbit.days.splice(currentDayId, 1);
+      return {
+        ...habbit,
+        days: habbit.days,
+      };
+    }
+    return habbit;
+  });
+  rerender(ACTIVE_HABBIT_ID);
+  saveData();
+};
+
+/* popup, add habbit */
+
+const openPopup = () => {
+  page.popup.index.classList.remove("cover_hidden");
+};
+
+const closePopup = () => {
+  page.popup.index.classList.add("cover_hidden");
+};
+
+function setIcon(context, icon) {
+  page.popup.iconInput.value = icon;
+  const activeIcon = document.querySelector(
+    ".popup__icon-btn.popup__icon-btn_active"
+  );
+  activeIcon.classList.remove("popup__icon-btn_active");
+  context.classList.add("popup__icon-btn_active");
+}
+
+const addHabbit = (event) => {
+  event.preventDefault();
+
+  const data = validateForm(event.target, ["icon", "name", "target"]);
+  if (!data) return;
+  habbits.push({
+    id: habbits.length,
+    icon: data.icon,
+    name: data.name,
+    target: data.target,
+    days: [],
+  });
+  event.target.reset();
+  closePopup();
+  saveData();
+  if (!ACTIVE_HABBIT_ID) {
+    rerender(habbits[0].id);
+  } else {
+    rerender(ACTIVE_HABBIT_ID);
+  }
+};
+
+const deleteHabbit = () => {
+  page.menu.innerHTML = "";
+  habbits.splice(ACTIVE_HABBIT_ID, 1);
+  habbits.forEach((habbit, index) => {
+    habbit.id = index;
+  });
+  rerender(0);
   saveData();
 };
 
 /* init */
 
 loadData();
-rerender(habbits[0].id);
+const hashId = Number(document.location.hash.replace("#", ""));
+const urlHabbit = habbits.find((habbit) => habbit.id == hashId);
+if (urlHabbit) {
+  rerender(urlHabbit.id);
+} else {
+  rerender(habbits[0].id);
+}
