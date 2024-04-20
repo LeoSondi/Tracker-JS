@@ -1,6 +1,6 @@
 "use strict";
 
-let habbits = [];
+let habits = [];
 const HABBIT_KEY = "HABBIT_KEY";
 let ACTIVE_HABBIT_ID;
 
@@ -15,7 +15,7 @@ const page = {
     progressBar: document.querySelector(".progress__cover-bar"),
   },
   content: {
-    days: document.querySelector(".habbits"),
+    days: document.querySelector(".habits"),
     nextDay: document.querySelector(".habbit__day"),
   },
   popup: {
@@ -27,16 +27,16 @@ const page = {
 /* utils */
 
 const loadData = () => {
-  const habbitsString = localStorage.getItem(HABBIT_KEY);
-  const habbitArray = JSON.parse(habbitsString);
+  const habitsString = localStorage.getItem(HABBIT_KEY);
+  const habbitArray = JSON.parse(habitsString);
 
   if (Array.isArray(habbitArray)) {
-    habbits = habbitArray;
+    habits = habbitArray;
   }
 };
 
 const saveData = () => {
-  localStorage.setItem(HABBIT_KEY, JSON.stringify(habbits));
+  localStorage.setItem(HABBIT_KEY, JSON.stringify(habits));
 };
 
 const validateForm = (form, fields) => {
@@ -68,7 +68,7 @@ const validateForm = (form, fields) => {
 /* render */
 
 const rerenderMenu = (activeHabbit) => {
-  for (const habbit of habbits) {
+  for (const habbit of habits) {
     const existed = document.querySelector(`[menu-habbit-id="${habbit.id}"]`);
 
     if (!existed) {
@@ -132,7 +132,7 @@ const rerenderContent = (activeHabbit) => {
 
 const rerender = (activeHabbitId) => {
   ACTIVE_HABBIT_ID = activeHabbitId;
-  const activeHabbit = habbits.find((habbit) => habbit.id === activeHabbitId);
+  const activeHabbit = habits.find((habbit) => habbit.id === activeHabbitId);
   if (!activeHabbit) {
     return;
   }
@@ -151,7 +151,7 @@ const addDay = (event) => {
 
   if (!data) return;
 
-  habbits = habbits.map((habbit) => {
+  habits = habits.map((habbit) => {
     if (habbit.id === ACTIVE_HABBIT_ID) {
       return {
         ...habbit,
@@ -166,7 +166,7 @@ const addDay = (event) => {
 };
 
 const deleteDay = (currentDayId) => {
-  habbits = habbits.map((habbit) => {
+  habits = habits.map((habbit) => {
     if (habbit.id === ACTIVE_HABBIT_ID) {
       habbit.days.splice(currentDayId, 1);
       return {
@@ -204,8 +204,8 @@ const addHabbit = (event) => {
 
   const data = validateForm(event.target, ["icon", "name", "target"]);
   if (!data) return;
-  habbits.push({
-    id: habbits.length,
+  habits.push({
+    id: habits.length,
     icon: data.icon,
     name: data.name,
     target: data.target,
@@ -215,7 +215,7 @@ const addHabbit = (event) => {
   closePopup();
   saveData();
   if (!ACTIVE_HABBIT_ID) {
-    rerender(habbits[0].id);
+    rerender(habits[0].id);
   } else {
     rerender(ACTIVE_HABBIT_ID);
   }
@@ -223,8 +223,8 @@ const addHabbit = (event) => {
 
 const deleteHabbit = () => {
   page.menu.innerHTML = "";
-  habbits.splice(ACTIVE_HABBIT_ID, 1);
-  habbits.forEach((habbit, index) => {
+  habits.splice(ACTIVE_HABBIT_ID, 1);
+  habits.forEach((habbit, index) => {
     habbit.id = index;
   });
   rerender(0);
@@ -235,9 +235,9 @@ const deleteHabbit = () => {
 
 loadData();
 const hashId = Number(document.location.hash.replace("#", ""));
-const urlHabbit = habbits.find((habbit) => habbit.id == hashId);
+const urlHabbit = habits.find((habbit) => habbit.id == hashId);
 if (urlHabbit) {
   rerender(urlHabbit.id);
 } else {
-  rerender(habbits[0].id);
+  rerender(habits[0].id);
 }

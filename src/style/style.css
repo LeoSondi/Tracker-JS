@@ -163,6 +163,12 @@ input.error {
   font-weight: 700;
 }
 
+.header__description {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #08080880;
+}
+
 .header__add-btn {
   background: inherit;
   transition: all 0.15s;
@@ -308,7 +314,7 @@ input.error {
   gap: 24px;
 }
 
-.habbits {
+.habits {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -500,7 +506,7 @@ input.error {
   .header {
     gap: 16px;
   }
-  .header__name {
+  .header__text {
     display: none;
   }
   .navigation {
