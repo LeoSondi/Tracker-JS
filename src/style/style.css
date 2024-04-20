@@ -248,6 +248,13 @@ input.error {
   background: #ec5b5b;
 }
 
+.main__habbit-delete-btn:focus {
+  border: 2px solid #080808;
+  opacity: 0.4;
+  color: #080808;
+  background: inherit;
+}
+
 .main__habbit-delete-btn img {
   vertical-align: middle;
 }
@@ -565,10 +572,6 @@ input.error {
   }
   .footer__text {
     font-size: 1.2rem;
-  }
-  .footer__text a img {
-    width: 20px;
-    height: 20px;
   }
   .popup h2 {
     margin: 0 0 8px;

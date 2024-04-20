@@ -76,7 +76,7 @@ const rerenderMenu = (activeHabbit) => {
       element.setAttribute("menu-habbit-id", habbit.id);
       element.classList.add("navigation__link");
       element.addEventListener("click", () => rerender(habbit.id));
-      element.innerHTML = `<img src="/src/assets/img/${habbit.icon}.svg" alt="${habbit.name}" class="btn-icon"/>`;
+      element.innerHTML = `<img src="https://i.postimg.cc/${habbit.icon}.png" alt="${habbit.name}" class="btn-icon"/>`;
 
       if (activeHabbit.id === habbit.id) {
         element.classList.add("navigation__link_active");
@@ -95,7 +95,7 @@ const rerenderMenu = (activeHabbit) => {
 
 const rerenderHead = (activeHabbit) => {
   page.header.h1.innerText = activeHabbit.name;
-  page.header.h2.innerHTML = `<img src="src/assets/img/bullseye-arrow.svg" alt="Goal Icon" /> Target — ${activeHabbit.target} days`;
+  page.header.h2.innerHTML = `<img src="https://i.postimg.cc/Y9CPFwNX/bullseye-arrow-1.png" width="28px" height="28px" alt="Goal Icon" /> Target — ${activeHabbit.target} days`;
   let progress =
     activeHabbit.days.length / activeHabbit.target > 1
       ? 100
@@ -115,7 +115,7 @@ const rerenderContent = (activeHabbit) => {
       }<button class="habbit__delete habbit__delete-mobile" onclick="deleteDay(${index}, ${
       activeHabbit.id
     })">
-          <img src="src/assets/img/trash.svg" alt="Delete Icon" />
+          <img src="https://i.postimg.cc/CKmPSQyb/trash-1.png" alt="Delete Icon" />
         </button></div>
       <div class="habbit__comment input">${
         activeHabbit.days[index].comment
@@ -123,7 +123,7 @@ const rerenderContent = (activeHabbit) => {
       <button class="habbit__delete habbit__delete-desktop" onclick="deleteDay(${index}, ${
       activeHabbit.id
     })">
-        <img src="src/assets/img/trash.svg" alt="Delete Icon" />
+        <img src="https://i.postimg.cc/CKmPSQyb/trash-1.png" alt="Delete Icon" />
       </button>`;
     page.content.days.appendChild(element);
   }
