@@ -1,6 +1,5 @@
 # YeNote
 
-Set goals, mark steps, write comments and keep track of your progress!
-Check -> [YeNote](https://leosondi.github.io/Tracker-JS/)
+Set goals, mark steps, write comments and keep track of your progress -> [YeNote](https://leosondi.github.io/Tracker-JS/)
 
-HTML/CSS/JS 
+A simple application in HTML CSS and JS, using local storage
